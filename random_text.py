@@ -1,11 +1,22 @@
+from flask import Flask, jsonify
 import random
 
+app = Flask(__name__)
+
 def generate_random_text():
-    words = ["Python", "GitHub", "Project", "Random", "Text", "Generator", "OpenAI", "Coding", "Learning", "Fun"]
+    words = ["Python", "GitHub", "Code", "Project", "OpenAI", "AI", "ChatGPT", "Random", "Text", "Generator"]
     sentence = " ".join(random.choices(words, k=5))
     return sentence
 
-if __name__ == "__main__":
-    print("Random Text Generator")
-    print("-" * 30)
-    print(f"Generated Text: {generate_random_text()}")
+@app.route('/')
+def home():
+    return "Welcome to the Random Text Generator API!"
+
+@app.route('/generate', methods=['GET'])
+def generate():
+    random_text = generate_random_text()
+    return jsonify({"random_text": random_text})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
