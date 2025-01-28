@@ -10,7 +10,7 @@ def generate_random_text():
 
 @app.route('/')
 def home():
-    return "Welcome to the Random Text Generator API!"
+    return "Hello from EC2"
 
 @app.route('/generate', methods=['GET'])
 def generate():
